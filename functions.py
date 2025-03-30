@@ -74,9 +74,9 @@ def lineplot(df, features, title=None):
     
     plt.figure(figsize=(20, 8));
     for feat in features:
-        x = df.groupby("Year")[feat].mean().reset_index().dropna()
+        x = df.groupby("year")[feat].mean().reset_index().dropna()
         y = (x[feat] - min(x[feat])) / (max(x[feat]) - min(x[feat]))
-        ax= sns.lineplot(x=x['Year'].astype(int), y= y, label=feat, linewidth = 4)
+        ax= sns.lineplot(x=x['year'].astype(int), y= y, label=feat, linewidth = 4)
     ax.set_title(title, fontsize=24);
     ax.set_ylabel('Scaled Value', fontsize=20);
     ax.set_xlabel('Year', fontsize=20);
