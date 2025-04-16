@@ -2,8 +2,24 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import geopandas as gpd
+from sklearn.preprocessing import StandardScaler
 
-def choropleth(df, feature, years, cmap, title=None, draw_borders=False):
+
+def rescale_keep_zero(series):
+    max_pos = series[series > 0].max()
+    min_neg = series[series < 0].min()
+
+    def scale_value(x):
+        if x > 0:
+            return x / max_pos if max_pos != 0 else 0
+        elif x < 0:
+            return x / abs(min_neg) if min_neg != 0 else 0
+        else:
+            return 0
+    return series.apply(scale_value)
+
+
+def choropleth(df, feature, years, cmap, title=None, draw_borders=False, save_img=False, rescale=False):
     ''' Parameters
         ----------
         df : Pandas dataframe
@@ -21,11 +37,19 @@ def choropleth(df, feature, years, cmap, title=None, draw_borders=False):
         matplotlib object
             Choropleth map(s) for specified feature and year(s)'''
 
+    # outside loop so that scale of all years is same
     vmin = df[feature].min()
     vmax = df[feature].max()
+
     for year in years:
         # Create df specific to year parameter
         map_df = df[df.year == year]
+        # rescale data
+        if rescale:
+            map_df[feature] = rescale_keep_zero(map_df[feature])
+            vmin=-1
+            vmax=1
+
         # Read shapefile using Geopandas
         shape_df= gpd.read_file('Data/Raw/tracts2020_shapefile/nyct2020.shp')
         geo_df = shape_df.merge(map_df, on='GEOID')
@@ -53,8 +77,12 @@ def choropleth(df, feature, years, cmap, title=None, draw_borders=False):
         cbr.set_label(feature, size=45)
         cbr.ax.tick_params(labelsize=35) 
         ax.set_axis_off()
-          # ax.annotate("__Optional Annotation__", xy=(0.25, .1), size=20, xycoords='figure fraction')
-    #     plt.savefig('../images/'+year+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
+        # ax.annotate("__Optional Annotation__", xy=(0.25, .1), size=20, xycoords='figure fraction')
+        if save_img:
+            if title:
+                plt.savefig(f'Images/{year}_{title}.png',format = 'png',bbox_inches='tight', transparent=True)
+            else:
+                plt.savefig(f'Images/{year}_{feature}.png',format = 'png',bbox_inches='tight', transparent=True)
 
 
 def lineplot(df, features, title=None):
