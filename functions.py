@@ -53,7 +53,7 @@ def choropleth(df, feature, years, cmap, title=None, draw_borders=False, save_im
         # Read shapefile using Geopandas
         shape_df= gpd.read_file('Data/Raw/tracts2020_shapefile/nyct2020.shp')
         geo_df = shape_df.merge(map_df, on='GEOID')
-        fig, ax = plt.subplots(figsize = (40,40))
+        fig, ax = plt.subplots(figsize = (40,40), dpi=200)
         ax.patch.set_alpha(0.0)
         # Plot the geodataframe
         geo_df.plot(ax=ax, column =feature, cmap=cmap, legend=False, antialiased=False)
@@ -102,11 +102,12 @@ def lineplot(df, features, title=None):
     
     plt.figure(figsize=(20, 8));
     for feat in features:
-        x = df.groupby("year")[feat].mean().reset_index().dropna()
-        y = (x[feat] - min(x[feat])) / (max(x[feat]) - min(x[feat]))
-        ax= sns.lineplot(x=x['year'].astype(int), y= y, label=feat, linewidth = 4)
+        # x = df.groupby("year")[feat].mean().reset_index().dropna()
+        # y = (x[feat] - min(x[feat])) / (max(x[feat]) - min(x[feat]))
+        y = df[feat]
+        ax= sns.lineplot(x=df['year'].astype(int), y= y, label=feat, linewidth = 4)
     ax.set_title(title, fontsize=24);
-    ax.set_ylabel('Scaled Value', fontsize=20);
+    ax.set_ylabel(feat, fontsize=20);
     ax.set_xlabel('Year', fontsize=20);
     ax.legend(prop=dict(size=18));
     plt.xticks(fontsize=16);
