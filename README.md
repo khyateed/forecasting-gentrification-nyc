@@ -12,29 +12,29 @@ To access the full paper or for additional questions, please contact khyatee.d@g
 
 ```
 ├── README.md
+│ 
+├── Wrangling .......................... Notebooks used for initial raw data collection and cleaning
 │
 ├── Data
-│   ├── Cleaned    <- Cleaned data files for each data source, generated through data wrangling
-│   └-- Outputs    <- Predictions, labels, intermediate files
-│ 
-├── Wrangling    <- Notebooks used for initial raw data collection and cleaning
+│   ├── Cleaned ........................ Cleaned data files generated through data wrangling
+│   └-- Outputs ........................ Predictions, labels, intermediate files
 │
-├── ML-Flow    <- Notebooks for each step of the ML process
-│   ├── 1-kriging.ipynb    <- Joins all cleaned data and interpolates missing values
-│   ├── 2-labeling.ipynb    <- Generates target variables
-│   ├── 3-feature_engineering.ipynb    <- Creates features from cleaned data
-│   └-- 4-modeling.ipynb    <- Uses ML model to generate predictions
+├── ML-Flow ............................ Notebooks for each step of the ML process
+│   ├── 1-kriging.ipynb ................ Joins all cleaned data and interpolates missing values
+│   ├── 2-labeling.ipynb ............... Generates target variables
+│   ├── 3-feature_engineering.ipynb .... Creates features from cleaned data
+│   └-- 4-modeling.ipynb ............... Uses ML model to generate predictions
 │
-├── Experiments    <- Notebooks for analysis of predictions
-│   ├── case_studies.ipynb    <- Inspects model predictions in specific Census Tracts of interest
-│   ├── clustering.ipynb    <- Experimental clustering of raw data
-│   └-- error_analysis.ipynb    <- Analysis of incorrect predictions
+├── Experiments ........................ Notebooks for analysis of predictions
+│   ├── case_studies.ipynb ............. Inspects model predictions in specific Census Tracts of interest
+│   ├── clustering.ipynb ............... Experimental clustering of raw data
+│   └-- error_analysis.ipynb ........... Analysis of incorrect predictions
 │
 ├── EDA
-│   ├── mapping.ipynb    <- Creates choropleth maps of features and predictions
-│   └-- functions.py    <- Helper functions
+│   ├── mapping.ipynb .................. Creates choropleth maps of features and predictions
+│   └-- functions.py ................... Helper functions
 │
-├── Reporting    <- Powerpoint slides and research poster
+├── Reporting .......................... Powerpoint slides and research poster
 │
-└-- Images    <- All images produced from EDA
+└-- Images ............................. Images produced from EDA
 ```
