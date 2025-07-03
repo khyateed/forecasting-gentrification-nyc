@@ -1,10 +1,40 @@
 # Predicting Green Gentrification in New York City
-### Introduction
-Gentrification is a socioeconomic phenomenon characterized by rising property values, changing demographics, and shifts in the cultural landscape of a neighborhood. By many, gentrification is viewed as a beneficial and inexorable process that enhances the quality of life within a neighborhood by improving infrastructure, encouraging new development, reducing crime, and attracting working professionals to an area. The primary adverse effect of these improvements however, relates to the ensuing increase in property value and rental prices that ultimately facilitates the displacement and cultural disintegration of the prior residents, who are typically comprised of minority groups of a lower socioeconomic status. In New York City, we can observe from the historic gentrification of the East Village, East Harlem, and Williamsburg, that this process culminates in a whiter, richer neighborhood composition at the cost of a worsened quality of life for displaced residents.
+### CUNY Graduate Center Masters Thesis<br>Kat Desai, advised by Professor Anita Raja<br>May, 2025 
+## Abstract
+This research presents a machine learning framework for predicting gentrification in New York City, with a focus on the role of green infrastructure in driving urban change. We trained a Random Forest classifier, using historical data on socioeconomic characteristics, housing, and sustainability developments, to identify Census Tracts likely to gentrify over a four-year horizon. Time-series and geospatial feature extraction techniques were used to capture neighborhood dynamics, while missing data was addressed through temporal and spatial interpolation. The final model achieved a balanced accuracy of 85.3% and an F1 score of 86.3%. Model evaluation methods include an ablation study, case studies, error analysis, and Shapley value interpretation. 
+<br>Results indicate that in the absence of key drivers, green infrastructure features– particularly the number of trees planted and biking-related infrastructure– were among the strongest predictors of gentrification. This suggests that while sustainable urban investments can enhance environmental quality, they may also facilitate neighborhood change and potential displacement. Our findings contribute to ongoing debates about the intersection of sustainability and equity in urban development, and offer insights for planners and policymakers into the spatial equity implications of green urban planning.
 
-Current efforts to understand gentrification are often retrospective, making it difficult for policymakers to proactively address the negative impacts of this phenomenon. Recent research on neighborhood change in NYC focuses on analyzing the correlations between associated indicators of gentrification, but falls short of utilizing this information to forecast the future evolution of neighborhoods. As a related issue, researchers have yet to come to a consensus on a unified measure of gentrification; much past research makes use of a single variable such as housing price or education level as a proxy measure, which cannot encapsulate the nuanced, multifaceted nature of neighborhood change. 
+## More Information
 
-**As such, our primary research aim is to predict which areas of NYC are likely to gentrify within the next decade, through the construction of a multivariate measure of neighborhood change.** Equipped with this forecast, city planners can make more informed decisions about housing policies, community initiatives, and infrastructure development, as well as invest more into rental protections, affordable housing, and eviction defense.
+To access the full paper or for additional questions, please contact khyatee.d@gmail.com
 
-### Green Gentrification
-A dimension of gentrification that has not been explored extensively within existing literature is a relatively new concept, coined “green gentrification.” Green gentrification is defined as the manner in which the creation of green infrastructure inadvertently contributes to rising property values and the overall gentrification of a neighborhood. While these green interventions are introduced with noble intent, the strategic rise of urban greening has been shown to accompany a flood of speculative capital investment in surrounding areas, giving way to a rise in overall neighborhood redevelopment and subsequent displacement of people. **As a secondary research goal, we aim to understand the influence of green infrastructure on the overall gentrification process in New York City.**
+## Repository Structure
+
+```
+├── README.md
+│
+├── Data
+│   ├── Cleaned    <- Cleaned data files for each data source, generated through data wrangling
+│   └-- Outputs    <- Predictions, labels, intermediate files
+│ 
+├── Wrangling    <- Notebooks used for initial raw data collection and cleaning
+│
+├── ML-Flow    <- Notebooks for each step of the ML process
+│   ├── 1-kriging.ipynb    <- Joins all cleaned data and interpolates missing values
+│   ├── 2-labeling.ipynb    <- Generates target variables
+│   ├── 3-feature_engineering.ipynb    <- Creates features from cleaned data
+│   └-- 4-modeling.ipynb    <- Uses ML model to generate predictions
+│
+├── Experiments    <- Notebooks for analysis of predictions
+│   ├── case_studies.ipynb    <- Inspects model predictions in specific Census Tracts of interest
+│   ├── clustering.ipynb    <- Experimental clustering of raw data
+│   └-- error_analysis.ipynb    <- Analysis of incorrect predictions
+│
+├── EDA
+│   ├── mapping.ipynb    <- Creates choropleth maps of features and predictions
+│   └-- functions.py    <- Helper functions
+│
+├── Reporting    <- Powerpoint slides and research poster
+│
+└-- Images    <- All images produced from EDA
+```
